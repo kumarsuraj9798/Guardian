@@ -1,0 +1,1 @@
+// Mongoose model for Police/Fire/Ambulance service status
