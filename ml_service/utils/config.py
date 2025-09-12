@@ -1,8 +1,8 @@
-from pydantic import BaseSettings
+import os
 
 
-class Settings(BaseSettings):
-    GEMINI_API_KEY: str | None = None
+class Settings:
+    GEMINI_API_KEY: str | None = os.getenv("GEMINI_API_KEY")
 
 
 settings = Settings()

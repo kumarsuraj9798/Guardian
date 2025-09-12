@@ -5,7 +5,6 @@ export default function SignIn({ onSignIn }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("citizen");
-  const [adminType, setAdminType] = useState("ambulance");
 
   useEffect(() => {
     // Load Google Identity Services
@@ -37,9 +36,24 @@ export default function SignIn({ onSignIn }) {
   };
 
   const doEmailRegister = async () => {
-    const res = await emailRegister({ email, password, role, adminType: role === "admin" ? adminType : undefined });
-    localStorage.setItem("gn_token", res.data.token);
-    onSignIn?.();
+    if (!email || !password) {
+      alert("Please fill email and password");
+      return;
+    }
+    try {
+      const payload = { 
+        email, 
+        password, 
+        name: email.split('@')[0], // default name from email
+        role 
+      };
+      const res = await emailRegister(payload);
+      localStorage.setItem("gn_token", res.data.token);
+      onSignIn?.();
+    } catch (error) {
+      console.error("Register failed:", error.response?.data || error.message);
+      alert("Registration failed: " + (error.response?.data?.message || error.message));
+    }
   };
 
   return (
@@ -53,13 +67,6 @@ export default function SignIn({ onSignIn }) {
           <label><input type="radio" name="role" value="citizen" checked={role === "citizen"} onChange={(e) => setRole(e.target.value)} /> Citizen</label>
           <label style={{ marginLeft: 12 }}><input type="radio" name="role" value="admin" checked={role === "admin"} onChange={(e) => setRole(e.target.value)} /> Admin</label>
         </div>
-        {role === "admin" && (
-          <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-            {(["ambulance","hospital","police","firebrigade"]).map((t) => (
-              <label key={t}><input type="radio" name="admintype" value={t} checked={adminType === t} onChange={(e) => setAdminType(e.target.value)} /> {t}</label>
-            ))}
-          </div>
-        )}
         <div style={{ display: "flex", gap: 10 }}>
           <button onClick={doEmailLogin} style={btn}>Login</button>
           <button onClick={doEmailRegister} style={btnAlt}>Register</button>

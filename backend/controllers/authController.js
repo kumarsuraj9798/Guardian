@@ -60,12 +60,12 @@ module.exports = { googleLogin, setRole };
 
 async function emailRegister(req, res) {
   try {
-    const { email, password, name, role, adminType } = req.body;
+    const { email, password, name, role } = req.body;
     if (!email || !password) return res.status(400).json({ message: "Email & password required" });
     const exists = await User.findOne({ email });
     if (exists) return res.status(409).json({ message: "User already exists" });
     const passwordHash = await bcrypt.hash(password, 10);
-    const user = await User.create({ email, name, passwordHash, role: role || "citizen", adminType: role === "admin" ? adminType || null : null });
+    const user = await User.create({ email, name, passwordHash, role: role || "citizen" });
     const token = jwt.sign(
       { userId: user._id, role: user.role, adminType: user.adminType },
       process.env.JWT_SECRET || "dev_secret",
