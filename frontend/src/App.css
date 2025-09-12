@@ -1,3 +1,19 @@
+.landing-gradient{background:radial-gradient(1200px 600px at 10% 10%,#0d47a1 0,#1976d2 35%,#42a5f5 60%,#7e57c2 85%)}
+.hero-grid{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.title-3d{font-size:56px;line-height:1.05;margin:0;text-shadow:0 10px 30px rgba(0,0,0,.35)}
+.subtitle{font-size:22px;font-weight:600;margin-top:10px;opacity:.95}
+.lede{margin-top:14px;font-size:18px;opacity:.95}
+.cta-row{display:flex;gap:12px;margin-top:22px;align-items:center}
+.btn-3d{background:linear-gradient(135deg,#bbdefb,#2196f3);color:#0d47a1;border:none;padding:14px 22px;border-radius:16px;font-weight:800;box-shadow:0 14px 28px rgba(25,118,210,.45);transform:translateZ(0);transition:transform .2s ease,box-shadow .2s ease}
+.btn-3d:hover{transform:translateY(-3px);box-shadow:0 18px 36px rgba(25,118,210,.55)}
+.icon-float{height:56px;filter:drop-shadow(0 6px 12px rgba(0,0,0,.3))}
+.scene{position:relative}
+.card-3d{width:420px;height:320px;border-radius:26px;overflow:hidden;box-shadow:0 30px 60px rgba(0,0,0,.35);transform:rotateY(-8deg) rotateX(5deg);background:rgba(255,255,255,.12);backdrop-filter:blur(6px);display:grid;place-items:center}
+.card-3d img{width:100%;height:100%;object-fit:cover;opacity:.95}
+.badge-row{position:absolute;bottom:10px;left:10px;display:flex;gap:8px;flex-wrap:wrap}
+.badge{background:rgba(255,255,255,.85);color:#0d47a1;font-weight:800;padding:6px 10px;border-radius:999px;box-shadow:0 10px 20px rgba(0,0,0,.25)}
+.chips{display:flex;gap:12px;flex-wrap:wrap}
+.chip-3d{background:linear-gradient(135deg,rgba(255,255,255,.25),rgba(255,255,255,.12));padding:14px;border-radius:14px;box-shadow:0 10px 22px rgba(0,0,0,.25)}
 /* Reset some default browser styles */
 * {
   margin: 0;

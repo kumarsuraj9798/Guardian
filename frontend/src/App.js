@@ -5,6 +5,7 @@ import SignIn from "./components/SignIn";
 import RoleSelect from "./components/RoleSelect";
 import CitizenPortal from "./components/CitizenPortal";
 import AdminDashboard from "./components/AdminDashboard";
+import History from "./components/History";
 import Footer from "./components/Footer";
 import "./App.css";
 
@@ -20,12 +21,13 @@ function App() {
 
   return (
     <>
-      <Navbar />
-      {page === "landing" && <LandingPage />}
+      <Navbar go={setPage} />
+      {page === "landing" && <LandingPage onSignInClick={() => setPage("signin")} />}
       {page === "signin" && <SignIn onSignIn={handleSignIn} />}
       {page === "role" && <RoleSelect onSelect={handleRoleSelect} />}
       {page === "citizen" && <CitizenPortal />}
       {page === "admin" && <AdminDashboard />}
+      {page === "history" && <History />}
       <Footer />
     </>
   );
