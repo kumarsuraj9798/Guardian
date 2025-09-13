@@ -4,8 +4,8 @@ export default function Navbar({ go }) {
   return (
     <nav className="navbar" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px 16px", background: "#0d47a1", color: "#fff", position: "sticky", top: 0, zIndex: 10 }}>
       <div className="logo" style={{ display: "flex", alignItems: "center", gap: 8, cursor: "pointer" }} onClick={() => go("landing")}>
-        <img src="/logo.png" alt="GuardianNet Logo" height="36" />
-        <span style={{ fontWeight: 800 }}>GuardianNet</span>
+        <img src="/logo.png" alt="GuardianNet Logo" height="40" style={{ filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.3))" }} />
+        <span style={{ fontWeight: 800, fontSize: "20px" }}>GuardianNet</span>
       </div>
       <div className="nav-links" style={{ display: "flex", gap: 12 }}>
         <button onClick={() => go("signin")} style={btn}>Sign In</button>

@@ -16,6 +16,7 @@ export const emailLogin = (payload) => API.post("/auth/email/login", payload);
 
 export const reportEmergency = (data) => API.post("/report", data);
 export const getHistory = () => API.get("/history");
+export const getIncidentHistory = () => API.get("/history/incidents");
 
 export const listUnits = () => API.get("/admin/units");
 export const upsertUnit = (payload) => API.post("/admin/units", payload);

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import LandingPage from "./components/LandingPage";
 import SignIn from "./components/SignIn";
@@ -7,13 +7,27 @@ import CitizenPortal from "./components/CitizenPortal";
 import AdminDashboard from "./components/AdminDashboard";
 import History from "./components/History";
 import Footer from "./components/Footer";
+import { useSessionHistory } from "./hooks/useSessionHistory";
 import "./App.css";
 
 function App() {
   const [page, setPage] = useState("landing");
   const [role, setRole] = useState(null);
+  const { trackPage } = useSessionHistory();
 
-  const handleSignIn = () => setPage("role");
+  // Track page visits
+  useEffect(() => {
+    trackPage(page);
+  }, [page, trackPage]);
+
+  const handleSignIn = (userRole) => {
+    if (userRole) {
+      setRole(userRole);
+      setPage(userRole === "citizen" ? "citizen" : "admin");
+    } else {
+      setPage("role");
+    }
+  };
   const handleRoleSelect = (r) => {
     setRole(r);
     setPage(r === "citizen" ? "citizen" : "admin");

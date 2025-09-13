@@ -1,6 +1,8 @@
 const express = require("express");
 const http = require("http");
 const cors = require("cors");
+const session = require("express-session");
+const MongoStore = require("connect-mongo");
 const connectToDatabase = require("./config/db");
 
 const app = express();
@@ -11,19 +13,47 @@ const io = require("socket.io")(server, {
 
 app.set("io", io);
 
-app.use(cors());
+app.use(cors({
+  origin: ["http://localhost:3000", "http://localhost:3001", "http://localhost:3002"],
+  credentials: true
+}));
 app.use(express.json({ limit: "10mb" }));
+
+// Session configuration
+app.use(session({
+  secret: process.env.SESSION_SECRET || "guardiannet_secret_key_2024",
+  resave: false,
+  saveUninitialized: false,
+  store: MongoStore.create({
+    mongoUrl: process.env.MONGO_URI || "mongodb://127.0.0.1:27017/guardiannet",
+    dbName: process.env.MONGO_DB || "guardiannet",
+    collectionName: "sessions"
+  }),
+  cookie: {
+    secure: false, // Set to true in production with HTTPS
+    httpOnly: true,
+    maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+  }
+}));
+
+// Import session middleware
+const { trackSession, trackIncidentReport, trackAdminAction } = require("./utils/sessionMiddleware");
+
+// Apply session tracking middleware
+app.use(trackSession);
 
 // Routes
 const authRoutes = require("./routes/auth");
 const reportRoutes = require("./routes/report");
 const adminRoutes = require("./routes/admin");
 const historyRoutes = require("./routes/history");
+const sessionRoutes = require("./routes/session");
 
 app.use("/api/auth", authRoutes);
-app.use("/api/report", reportRoutes);
-app.use("/api/admin", adminRoutes);
+app.use("/api/report", trackIncidentReport, reportRoutes);
+app.use("/api/admin", trackAdminAction, adminRoutes);
 app.use("/api/history", historyRoutes);
+app.use("/api/session", sessionRoutes);
 
 app.get("/", (req, res) => res.send("GuardianNet Backend Running"));
 

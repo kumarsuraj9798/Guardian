@@ -48,8 +48,11 @@ export default function AdminDashboard() {
       <div style={{ display: "grid", gap: 12 }}>
         {units.map((u) => (
           <div key={u._id} style={{ background: "#e3f2fd", padding: 12, borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-            <div>
-              <b>{u.name}</b> • {u.type} • {u.isActive ? "Active" : "Inactive"}
+            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              <img src={serviceIcons[u.type] || "/ambulance.png"} alt={u.type} height="24" style={{ filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.3))" }} />
+              <div>
+                <b>{u.name}</b> • {u.type} • {u.isActive ? "Active" : "Inactive"}
+              </div>
             </div>
             <button onClick={() => onToggle(u)} style={{
               ...btn,
@@ -67,3 +70,11 @@ export default function AdminDashboard() {
 
 const inp = { padding: 10, borderRadius: 10, border: "1px solid #90caf9" };
 const btn = { background: "linear-gradient(135deg,#bbdefb,#2196f3)", color: "#0d47a1", padding: "12px 18px", border: 0, borderRadius: 12, fontWeight: 800, boxShadow: "0 12px 22px rgba(25,118,210,0.35)" };
+
+// Add service icons
+const serviceIcons = {
+  ambulance: "/ambulance.png",
+  hospital: "/ambulance.png", // Use ambulance icon for hospital
+  police: "/police.png",
+  firebrigade: "/firebrigade.png"
+};

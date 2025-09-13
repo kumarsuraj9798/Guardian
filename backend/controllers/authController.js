@@ -34,6 +34,17 @@ async function googleLogin(req, res) {
       process.env.JWT_SECRET || "dev_secret",
       { expiresIn: "7d" }
     );
+    
+    // Store user info in session
+    req.session.user = {
+      _id: user._id,
+      email: user.email,
+      name: user.name,
+      role: user.role,
+      adminType: user.adminType
+    };
+    req.session.token = token;
+    
     return res.json({ token, user });
   } catch (e) {
     console.error(e);
@@ -56,21 +67,39 @@ async function setRole(req, res) {
   }
 }
 
-module.exports = { googleLogin, setRole };
-
 async function emailRegister(req, res) {
   try {
-    const { email, password, name, role } = req.body;
-    if (!email || !password) return res.status(400).json({ message: "Email & password required" });
+    const { email, password, name, phone, role } = req.body;
+    if (!email || !password || !phone) {
+      return res.status(400).json({ message: "Email, password, and contact number are required" });
+    }
     const exists = await User.findOne({ email });
     if (exists) return res.status(409).json({ message: "User already exists" });
     const passwordHash = await bcrypt.hash(password, 10);
-    const user = await User.create({ email, name, passwordHash, role: role || "citizen" });
+    const user = await User.create({ 
+      email, 
+      name: name || email.split('@')[0], // Use email prefix as name if not provided
+      phone,
+      passwordHash, 
+      role: role || "citizen" 
+    });
     const token = jwt.sign(
       { userId: user._id, role: user.role, adminType: user.adminType },
       process.env.JWT_SECRET || "dev_secret",
       { expiresIn: "7d" }
     );
+    
+    // Store user info in session
+    req.session.user = {
+      _id: user._id,
+      email: user.email,
+      name: user.name,
+      phone: user.phone,
+      role: user.role,
+      adminType: user.adminType
+    };
+    req.session.token = token;
+    
     return res.json({ token, user });
   } catch (e) {
     console.error(e);
@@ -90,6 +119,17 @@ async function emailLogin(req, res) {
       process.env.JWT_SECRET || "dev_secret",
       { expiresIn: "7d" }
     );
+    
+    // Store user info in session
+    req.session.user = {
+      _id: user._id,
+      email: user.email,
+      name: user.name,
+      role: user.role,
+      adminType: user.adminType
+    };
+    req.session.token = token;
+    
     return res.json({ token, user });
   } catch (e) {
     console.error(e);
@@ -97,5 +137,4 @@ async function emailLogin(req, res) {
   }
 }
 
-module.exports.emailRegister = emailRegister;
-module.exports.emailLogin = emailLogin;
+module.exports = { googleLogin, setRole, emailRegister, emailLogin };
