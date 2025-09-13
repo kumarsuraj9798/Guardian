@@ -65,9 +65,30 @@ cd GuardianNet
 
 # Install frontend dependencies
 cd client
+
+## ⚙️ Installation & Setup  
+
+### 2️⃣ Install dependencies  
+```bash
+# Install frontend dependencies
+cd client
 npm install
 
 # Install backend dependencies
 cd ../server
 npm install
+
+npm install
+
+# Install backend dependencies
+cd ../server
+npm install
+
+###3️⃣ Configure environment variables
+
+**Create a .env file in the backend (server/) with:
+
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_secret_key
+PORT=5000
 
