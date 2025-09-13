@@ -116,27 +116,29 @@ npm start
 
 ## App will run at:
 
-**Frontend → http://localhost:3000
+**Frontend**
+→ http://localhost:3000
 
-**Backend → http://localhost:5000
+**Backend**
+→ http://localhost:5000
 
 ---
 
 ## 🛠️ Tech Stack
 
-**Frontend: 
+**Frontend:** 
 React.js / Next.js, TailwindCSS
 
-**Backend:
+**Backend:**
 Node.js, Express.js
 
-**Database:
+**Database:**
 MongoDB (Compass/Atlas)
 
-**AI/ML: 
+**AI/ML:**
 Python/Node ML libraries (for classification)
 
-**Auth: 
+**Auth:** 
 JWT-based authentication
 ---
 
@@ -144,25 +146,31 @@ JWT-based authentication
 ---
 ## ✅ Basic emergency reporting system
 
+
 ## ✅ User/Admin authentication
+
 
 ## 🔄 Real-time location-based dispatch
 
+
 ## 🔄 AI-powered resource allocation
+
 
 ## 🔄 Mobile App Integration
 
+
 ## 🤝 Contributing
+
 
 ## Contributions are welcome! Please fork this repo and submit a pull request.
 
 ## 📄 License
 
-**This project is licensed under the MIT License.
+**This project is licensed under the MIT License.**
 
 ## 👨‍💻 Authors
 
-**Suraj Kumar – GitHub
+**Suraj Kumar – GitHub**
 
 
 
