@@ -94,10 +94,11 @@ npm install
 # Install backend dependencies
 cd ../server
 npm install
-
+---
 # 3️⃣ Configure environment variables
 
 Create a .env file in the backend (server/) with:
+
 **mongo_uri=**
 your_mongodb_connection_string
 **jwt_secret=**
