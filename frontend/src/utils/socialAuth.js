@@ -1,74 +1,13 @@
 // Social Authentication Utilities
-// Facebook and Instagram login implementations
+// Instagram and Google login implementation
 
 import { SOCIAL_AUTH_CONFIG } from '../config/socialAuth';
 
-// Facebook App Configuration
-const FACEBOOK_APP_ID = SOCIAL_AUTH_CONFIG.FACEBOOK_APP_ID;
+// Instagram App Configuration
 const INSTAGRAM_CLIENT_ID = SOCIAL_AUTH_CONFIG.INSTAGRAM_CLIENT_ID;
 
-// Load Facebook SDK
-export const loadFacebookSDK = () => {
-  return new Promise((resolve, reject) => {
-    if (window.FB) {
-      resolve(window.FB);
-      return;
-    }
-
-    const script = document.createElement('script');
-    script.src = 'https://connect.facebook.net/en_US/sdk.js';
-    script.async = true;
-    script.defer = true;
-    
-    script.onload = () => {
-      window.FB.init({
-        appId: FACEBOOK_APP_ID,
-        cookie: true,
-        xfbml: true,
-        version: 'v18.0'
-      });
-      resolve(window.FB);
-    };
-    
-    script.onerror = () => reject(new Error('Failed to load Facebook SDK'));
-    document.body.appendChild(script);
-  });
-};
-
-// Facebook Login
-export const loginWithFacebook = async () => {
-  try {
-    const FB = await loadFacebookSDK();
-    
-    return new Promise((resolve, reject) => {
-      FB.login((response) => {
-        if (response.authResponse) {
-          // Get user info
-          FB.api('/me', { fields: 'id,name,email,picture' }, (userInfo) => {
-            if (userInfo && !userInfo.error) {
-              resolve({
-                accessToken: response.authResponse.accessToken,
-                userID: response.authResponse.userID,
-                userInfo: {
-                  id: userInfo.id,
-                  name: userInfo.name,
-                  email: userInfo.email,
-                  picture: userInfo.picture?.data?.url
-                }
-              });
-            } else {
-              reject(new Error('Failed to get user info from Facebook'));
-            }
-          });
-        } else {
-          reject(new Error('Facebook login was cancelled or failed'));
-        }
-      }, { scope: 'email,public_profile' });
-    });
-  } catch (error) {
-    throw new Error(`Facebook login error: ${error.message}`);
-  }
-};
+// Google App Configuration
+const GOOGLE_CLIENT_ID = SOCIAL_AUTH_CONFIG.GOOGLE_CLIENT_ID;
 
 // Instagram Login (using Instagram Basic Display API)
 export const loginWithInstagram = () => {
@@ -156,4 +95,78 @@ export const handleInstagramCallback = (code) => {
     })
     .catch(error => reject(error));
   });
+};
+
+// Google Login (using Google Identity Services)
+export const loginWithGoogle = () => {
+  return new Promise((resolve, reject) => {
+    // Check if Google client ID is configured
+    if (!GOOGLE_CLIENT_ID || GOOGLE_CLIENT_ID === 'YOUR_GOOGLE_CLIENT_ID') {
+      reject(new Error('Google Client ID not configured. Please set REACT_APP_GOOGLE_CLIENT_ID in your environment variables.'));
+      return;
+    }
+
+    // Load Google Identity Services script if not already loaded
+    if (!window.google) {
+      const script = document.createElement('script');
+      script.src = 'https://accounts.google.com/gsi/client';
+      script.async = true;
+      script.defer = true;
+      script.onload = () => {
+        setTimeout(() => {
+          initializeGoogleAuth(resolve, reject);
+        }, 100); // Small delay to ensure Google is fully loaded
+      };
+      script.onerror = () => {
+        reject(new Error('Failed to load Google Identity Services'));
+      };
+      document.head.appendChild(script);
+    } else {
+      initializeGoogleAuth(resolve, reject);
+    }
+  });
+};
+
+const initializeGoogleAuth = (resolve, reject) => {
+  try {
+    if (!window.google || !window.google.accounts) {
+      reject(new Error('Google Identity Services not loaded properly'));
+      return;
+    }
+
+    window.google.accounts.id.initialize({
+      client_id: GOOGLE_CLIENT_ID,
+      callback: (response) => {
+        try {
+          // Decode the JWT token to get user info
+          const payload = JSON.parse(atob(response.credential.split('.')[1]));
+          resolve({
+            idToken: response.credential,
+            userInfo: {
+              id: payload.sub,
+              email: payload.email,
+              name: payload.name,
+              picture: payload.picture,
+              given_name: payload.given_name,
+              family_name: payload.family_name
+            }
+          });
+        } catch (error) {
+          reject(new Error('Failed to parse Google response'));
+        }
+      },
+      auto_select: false,
+      cancel_on_tap_outside: true
+    });
+
+    // Prompt the user to sign in
+    window.google.accounts.id.prompt((notification) => {
+      if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
+        // User cancelled or skipped
+        reject(new Error('Google sign-in was cancelled'));
+      }
+    });
+  } catch (error) {
+    reject(new Error('Failed to initialize Google authentication'));
+  }
 };

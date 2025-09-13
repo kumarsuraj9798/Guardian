@@ -34,7 +34,7 @@ export default function AdminDashboard() {
 
   return (
     <div style={{ padding: 24 }}>
-      <h2>Responder Admin</h2>
+      <h2>Emergency Admin</h2>
       <div style={{ display: "grid", gap: 12, maxWidth: 720 }}>
         <input placeholder="Unit name (e.g., CityCare Ambulance)" value={name} onChange={(e) => setName(e.target.value)} style={inp} />
         <select value={type} onChange={(e) => setType(e.target.value)} style={inp}>
