@@ -59,17 +59,17 @@ It leverages **AI decision-making, real-time tracking, and an intuitive dashboar
 ---
 
 ## 📸 Screenshots  
-### Landing Page  
+# Landing Page  
 ![Landing Page Demo](docs/screenshots/landing.png)  
 
-### Active Incidents  
+# Active Incidents  
 ![Incidents Dashboard](docs/screenshots/incidents.png)  
 
 ---
 
-## ⚙️ Installation & Setup  
+# ⚙️ Installation & Setup  
 
-## 1️⃣ Clone the repository  
+# 1️⃣ Clone the repository  
 bash
 git clone https://github.com/your-username/GuardianNet.git
 cd GuardianNet
@@ -77,9 +77,9 @@ cd GuardianNet
 # Install frontend dependencies
 cd client
 
-## ⚙️ Installation & Setup  
+# ⚙️ Installation & Setup  
 ---
-### 2️⃣ Install dependencies  
+## 2️⃣ Install dependencies  
 bash
 # Install frontend dependencies
 cd client
@@ -95,16 +95,16 @@ npm install
 cd ../server
 npm install
 
-## 3️⃣ Configure environment variables
+# 3️⃣ Configure environment variables
 
-**Create a .env file in the backend (server/) with:
+**Create a .env file in the backend (server/) with:**
 
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_secret_key
 PORT=5000
 ---
 
-## 4️⃣ Run the project
+# 4️⃣ Run the project
 **Start backend
 cd server
 npm start
@@ -114,7 +114,7 @@ cd ../client
 npm start
 
 
-## App will run at:
+# App will run at:
 
 **Frontend**
 → http://localhost:3000
@@ -124,7 +124,7 @@ npm start
 
 ---
 
-## 🛠️ Tech Stack
+# 🛠️ Tech Stack
 
 **Frontend:** 
 React.js / Next.js, TailwindCSS
@@ -142,29 +142,29 @@ Python/Node ML libraries (for classification)
 JWT-based authentication
 ---
 
-## 📌 Roadmap
+# 📌 Roadmap
 ---
-## ✅ Basic emergency reporting system
+# ✅ Basic emergency reporting system
 
 
-## ✅ User/Admin authentication
+# ✅ User/Admin authentication
 
 
-## 🔄 Real-time location-based dispatch
+# 🔄 Real-time location-based dispatch
 
 
-## 🔄 AI-powered resource allocation
+# 🔄 AI-powered resource allocation
 
 
-## 🔄 Mobile App Integration
+# 🔄 Mobile App Integration
 
 
-## 🤝 Contributing
+# 🤝 Contributing
 
 
-## Contributions are welcome! Please fork this repo and submit a pull request.
+# Contributions are welcome! Please fork this repo and submit a pull request.
 
-## 📄 License
+# 📄 License
 
 **This project is licensed under the MIT License.**
 
