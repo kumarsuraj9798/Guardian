@@ -113,7 +113,7 @@ npm start
 cd ../client
 npm start
 
-
+---
 # App will run at:
 
 **Frontend**
@@ -125,7 +125,7 @@ npm start
 ---
 
 # 🛠️ Tech Stack
-
+---
 **Frontend:** 
 React.js / Next.js, TailwindCSS
 
@@ -162,13 +162,13 @@ JWT-based authentication
 🤝 Contributing
 
 
-# Contributions are welcome! Please fork this repo and submit a pull request.
+Contributions are welcome! Please fork this repo and submit a pull request.
 
-# 📄 License
+📄 License
 
 **This project is licensed under the MIT License.**
 
-## 👨‍💻 Authors
+👨‍💻 Authors
 
 **Suraj Kumar – GitHub**
 
