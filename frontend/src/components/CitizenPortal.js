@@ -67,7 +67,13 @@ export default function CitizenPortal() {
     const file = e.target.files?.[0];
     if (!file) return;
     const b64 = await fileToBase64(file);
-    setMedia((m) => [...m, { type, content: b64, name: file.name, size: file.size }]);
+    const newMedia = { type, content: b64, name: file.name, size: file.size };
+    setMedia((m) => [...m, newMedia]);
+    
+    // Auto-analyze and report after a short delay
+    setTimeout(() => {
+      autoAnalyzeAndReport([...media, newMedia], description);
+    }, 1000);
   };
 
   const removeMedia = (index) => {
