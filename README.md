@@ -144,22 +144,22 @@ JWT-based authentication
 
 # 📌 Roadmap
 ---
-# ✅ Basic emergency reporting system
+✅ Basic emergency reporting system
 
 
-# ✅ User/Admin authentication
+✅ User/Admin authentication
 
 
-# 🔄 Real-time location-based dispatch
+🔄 Real-time location-based dispatch
 
 
-# 🔄 AI-powered resource allocation
+🔄 AI-powered resource allocation
 
 
-# 🔄 Mobile App Integration
+🔄 Mobile App Integration
 
 
-# 🤝 Contributing
+🤝 Contributing
 
 
 # Contributions are welcome! Please fork this repo and submit a pull request.
