@@ -1,6 +1,17 @@
 # GuardianNet 🚨  
 **AI-powered Emergency Dispatch System**
 
+![License](https://img.shields.io/badge/license-MIT-green)  
+![Build](https://img.shields.io/badge/build-passing-brightgreen)  
+![MongoDB](https://img.shields.io/badge/Database-MongoDB-blue)  
+![Node.js](https://img.shields.io/badge/Backend-Node.js-yellow)  
+![React](https://img.shields.io/badge/Frontend-React-blue)  
+![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-orange)  
+
+GuardianNet is a smart **Emergency AI Response System** designed to quickly connect people in crisis with the nearest responders such as **Ambulance, Police, Fire, and Hospitals**.  
+It leverages **AI decision-making, real-time tracking, and an intuitive dashboard** to improve emergency response times and save lives.  
+
+
 GuardianNet is a smart **Emergency AI Response System** designed to quickly connect people in crisis with the nearest responders such as **Ambulance, Police, Fire, and Hospitals**.  
 It leverages **AI decision-making, real-time tracking, and an intuitive dashboard** to improve emergency response times and save lives.  
 
@@ -58,7 +69,7 @@ It leverages **AI decision-making, real-time tracking, and an intuitive dashboar
 
 ## ⚙️ Installation & Setup  
 
-### 1️⃣ Clone the repository  
+## 1️⃣ Clone the repository  
 bash
 git clone https://github.com/your-username/GuardianNet.git
 cd GuardianNet
@@ -84,11 +95,74 @@ npm install
 cd ../server
 npm install
 
-###3️⃣ Configure environment variables
+## 3️⃣ Configure environment variables
 
 **Create a .env file in the backend (server/) with:
 
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_secret_key
 PORT=5000
+---
+
+## 4️⃣ Run the project
+**Start backend
+cd server
+npm start
+
+**Start frontend
+cd ../client
+npm start
+
+
+## App will run at:
+
+**Frontend → http://localhost:3000
+
+**Backend → http://localhost:5000
+
+---
+
+## 🛠️ Tech Stack
+
+**Frontend: 
+React.js / Next.js, TailwindCSS
+
+**Backend:
+Node.js, Express.js
+
+**Database:
+MongoDB (Compass/Atlas)
+
+**AI/ML: 
+Python/Node ML libraries (for classification)
+
+**Auth: 
+JWT-based authentication
+---
+
+## 📌 Roadmap
+---
+## ✅ Basic emergency reporting system
+
+## ✅ User/Admin authentication
+
+## 🔄 Real-time location-based dispatch
+
+## 🔄 AI-powered resource allocation
+
+## 🔄 Mobile App Integration
+
+## 🤝 Contributing
+
+## Contributions are welcome! Please fork this repo and submit a pull request.
+
+## 📄 License
+
+**This project is licensed under the MIT License.
+
+## 👨‍💻 Authors
+
+**Suraj Kumar – GitHub
+
+
 
