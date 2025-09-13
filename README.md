@@ -79,7 +79,7 @@ cd client
 
 # ⚙️ Installation & Setup  
 ---
-## 2️⃣ Install dependencies  
+# 2️⃣ Install dependencies  
 bash
 # Install frontend dependencies
 cd client
