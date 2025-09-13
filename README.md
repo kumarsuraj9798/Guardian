@@ -98,17 +98,21 @@ npm install
 # 3️⃣ Configure environment variables
 
 Create a .env file in the backend (server/) with:
-MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=your_secret_key
-PORT=5000
+**mongo_uri=**
+your_mongodb_connection_string
+**jwt_secret=**
+your_secret_key
+**port=**
+5000
+
 ---
 
 # 4️⃣ Run the project
-**Start backend
+**Start backend:**
 cd server
 npm start
 
-**Start frontend
+**Start frontend:**
 cd ../client
 npm start
 
