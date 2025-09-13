@@ -71,7 +71,7 @@ It leverages **AI decision-making, real-time tracking, and an intuitive dashboar
 
 # 1️⃣ Clone the repository  
 bash
-git clone https://github.com/your-username/GuardianNet.git
+git clone https://github.com/kumarsuraj9798/GuardianNet.git
 cd GuardianNet
 
 # Install frontend dependencies
@@ -97,7 +97,7 @@ npm install
 
 # 3️⃣ Configure environment variables
 
-**Create a .env file in the backend (server/) with:**
+Create a .env file in the backend (server/) with:
 
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_secret_key
