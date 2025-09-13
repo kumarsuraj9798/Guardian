@@ -7,6 +7,7 @@ import CitizenPortal from "./components/CitizenPortal";
 import AdminDashboard from "./components/AdminDashboard";
 import History from "./components/History";
 import Footer from "./components/Footer";
+import InstagramCallback from "./components/InstagramCallback";
 import { useSessionHistory } from "./hooks/useSessionHistory";
 import "./App.css";
 
@@ -37,11 +38,12 @@ function App() {
     <>
       <Navbar go={setPage} />
       {page === "landing" && <LandingPage onSignInClick={() => setPage("signin")} />}
-      {page === "signin" && <SignIn onSignIn={handleSignIn} />}
+      {page === "signin" && <SignIn onSignIn={handleSignIn} onClose={() => setPage("landing")} />}
       {page === "role" && <RoleSelect onSelect={handleRoleSelect} />}
       {page === "citizen" && <CitizenPortal />}
       {page === "admin" && <AdminDashboard />}
       {page === "history" && <History />}
+      {page === "instagram-callback" && <InstagramCallback />}
       <Footer />
     </>
   );

@@ -3,9 +3,11 @@ const mongoose = require("mongoose");
 const UserSchema = new mongoose.Schema(
   {
     googleId: { type: String, index: true },
+    facebookId: { type: String, index: true },
+    instagramId: { type: String, index: true },
     email: { type: String, required: true, unique: true },
     name: { type: String, required: true },
-    phone: { type: String, required: true },
+    phone: { type: String },
     address: { type: String },
     emergencyContact: { type: String },
     avatarUrl: { type: String },

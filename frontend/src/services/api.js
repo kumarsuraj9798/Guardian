@@ -10,6 +10,8 @@ API.interceptors.request.use((config) => {
 });
 
 export const authGoogle = (payload) => API.post("/auth/google", payload);
+export const authFacebook = (payload) => API.post("/auth/facebook", payload);
+export const authInstagram = (payload) => API.post("/auth/instagram", payload);
 export const setRole = (payload) => API.post("/auth/role", payload);
 export const emailRegister = (payload) => API.post("/auth/email/register", payload);
 export const emailLogin = (payload) => API.post("/auth/email/login", payload);
