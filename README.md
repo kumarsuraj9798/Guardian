@@ -59,7 +59,7 @@ It leverages **AI decision-making, real-time tracking, and an intuitive dashboar
 ## ⚙️ Installation & Setup  
 
 ### 1️⃣ Clone the repository  
-```bash
+bash
 git clone https://github.com/your-username/GuardianNet.git
 cd GuardianNet
 
@@ -67,9 +67,9 @@ cd GuardianNet
 cd client
 
 ## ⚙️ Installation & Setup  
-
+---
 ### 2️⃣ Install dependencies  
-```bash
+bash
 # Install frontend dependencies
 cd client
 npm install
