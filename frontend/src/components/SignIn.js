@@ -112,7 +112,39 @@ export default function SignIn({ onSignIn }) {
         {/* Modal Header */}
         <div className="modal-header">
           <h2 className="modal-title">Log in</h2>
-          <button className="close-btn" onClick={() => window.history.back()}>×</button>
+          <button 
+            className="close-btn" 
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              window.history.back();
+            }}
+            style={{
+              background: "#f44336",
+              color: "white",
+              border: "none",
+              borderRadius: "50%",
+              width: 30,
+              height: 30,
+              cursor: "pointer",
+              fontSize: "16px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              transition: "all 0.2s ease",
+              boxShadow: "0 2px 4px rgba(244, 67, 54, 0.3)"
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.background = "#d32f2f";
+              e.target.style.transform = "scale(1.1)";
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.background = "#f44336";
+              e.target.style.transform = "scale(1)";
+            }}
+          >
+            ×
+          </button>
         </div>
 
         {/* New User Link */}
@@ -228,7 +260,39 @@ export default function SignIn({ onSignIn }) {
             {/* Modal Header */}
             <div className="modal-header">
               <h2 className="modal-title">Create Account</h2>
-              <button className="close-btn" onClick={() => setShowRegisterModal(false)}>×</button>
+              <button 
+                className="close-btn" 
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  setShowRegisterModal(false);
+                }}
+                style={{
+                  background: "#f44336",
+                  color: "white",
+                  border: "none",
+                  borderRadius: "50%",
+                  width: 30,
+                  height: 30,
+                  cursor: "pointer",
+                  fontSize: "16px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  transition: "all 0.2s ease",
+                  boxShadow: "0 2px 4px rgba(244, 67, 54, 0.3)"
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.background = "#d32f2f";
+                  e.target.style.transform = "scale(1.1)";
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.background = "#f44336";
+                  e.target.style.transform = "scale(1)";
+                }}
+              >
+                ×
+              </button>
             </div>
 
             {/* Already have account link */}
@@ -318,7 +382,7 @@ export default function SignIn({ onSignIn }) {
               </button>
               <button className="social-btn microsoft">
                 <span className="social-icon">M</span>
-              </button>
+      </button>
             </div>
           </div>
         </div>
@@ -329,7 +393,39 @@ export default function SignIn({ onSignIn }) {
         <div className="google-popup-content">
           <h3>Sign in with Google</h3>
           <div id="googleSignInDiv" />
-          <button className="close-popup" onClick={() => setShowGooglePopup(false)}>×</button>
+          <button 
+            className="close-popup" 
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setShowGooglePopup(false);
+            }}
+            style={{
+              background: "#f44336",
+              color: "white",
+              border: "none",
+              borderRadius: "50%",
+              width: 30,
+              height: 30,
+              cursor: "pointer",
+              fontSize: "16px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              transition: "all 0.2s ease",
+              boxShadow: "0 2px 4px rgba(244, 67, 54, 0.3)"
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.background = "#d32f2f";
+              e.target.style.transform = "scale(1.1)";
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.background = "#f44336";
+              e.target.style.transform = "scale(1)";
+            }}
+          >
+            ×
+      </button>
         </div>
       </div>
     </div>

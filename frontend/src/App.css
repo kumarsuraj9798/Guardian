@@ -38,9 +38,10 @@
 .signin-modal{
   background:white;
   border-radius:16px;
-  padding:24px;
+  padding:32px;
   width:100%;
-  max-width:400px;
+  max-width:600px;
+  min-width:450px;
   max-height:90vh;
   box-shadow:0 20px 40px rgba(0,0,0,0.15);
   position:relative;
@@ -431,9 +432,10 @@
 .register-modal{
   background:white;
   border-radius:16px;
-  padding:24px;
+  padding:32px;
   width:100%;
-  max-width:450px;
+  max-width:650px;
+  min-width:500px;
   max-height:90vh;
   box-shadow:0 20px 40px rgba(0,0,0,0.15);
   position:relative;
@@ -579,7 +581,7 @@
 }
 
 /* Responsive adjustments for smaller screens */
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .signin-modal-overlay,
   .register-modal-overlay {
     padding: 10px;
@@ -590,6 +592,22 @@
     padding: 20px;
     max-height: 95vh;
     margin: 10px;
+    min-width: unset;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .signin-modal-overlay,
+  .register-modal-overlay {
+    padding: 5px;
+  }
+  
+  .signin-modal,
+  .register-modal {
+    padding: 16px;
+    max-height: 98vh;
+    margin: 5px;
   }
   
   .modal-title {
@@ -616,6 +634,64 @@
   .input-group {
     margin-bottom: 16px;
   }
+  
+  .form-input,
+  .form-select {
+    padding: 12px;
+    font-size: 14px;
+  }
+  
+  .signin-btn,
+  .signup-btn,
+  .register-btn {
+    padding: 12px;
+    font-size: 14px;
+  }
+}
+
+/* Media Dropdown Styles */
+.media-dropdown {
+  position: relative;
+}
+
+.media-dropdown-content {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  z-index: 1000;
+  min-width: 200px;
+  margin-top: 4px;
+}
+
+.media-dropdown-option {
+  display: block;
+  width: 100%;
+  padding: 12px 16px;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px;
+  color: #333;
+  transition: background-color 0.2s ease;
+}
+
+.media-dropdown-option:hover {
+  background-color: #f5f5f5;
+}
+
+.media-dropdown-option:active {
+  background-color: #e0e0e0;
+}
+
+@keyframes recordingPulse {
+  0% { background: linear-gradient(135deg, #ff6b6b, #ee5a24); }
+  50% { background: linear-gradient(135deg, #ff5252, #d63031); }
+  100% { background: linear-gradient(135deg, #ff6b6b, #ee5a24); }
 }
 .chips{display:flex;gap:12px;flex-wrap:wrap}
 .chip-3d{background:linear-gradient(135deg,rgba(255,255,255,.25),rgba(255,255,255,.12));padding:14px;border-radius:14px;box-shadow:0 10px 22px rgba(0,0,0,.25)}

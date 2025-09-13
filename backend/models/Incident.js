@@ -22,7 +22,7 @@ const IncidentSchema = new mongoose.Schema(
     description: { type: String },
     media: { type: [MediaSchema], default: [] },
     location: { type: GeoPointSchema, required: true },
-    classifiedService: { type: String, enum: ["ambulance", "hospital", "police", "firebrigade"], default: null },
+    classifiedService: { type: String, enum: ["ambulance", "hospital", "police", "firebrigade"], required: false },
     assignedUnitId: { type: mongoose.Schema.Types.ObjectId, ref: "ServiceUnit", default: null },
     status: { type: String, enum: ["reported", "dispatched", "enroute", "resolved"], default: "reported" },
   },

@@ -23,34 +23,57 @@ class Report(BaseModel):
 @app.post("/classify")
 def classify(report: Report):
     api_key = settings.GEMINI_API_KEY or os.getenv("GEMINI_API_KEY")
+    
+    print(f"Received report: text={bool(report.text)}, image={bool(report.image)}, video={bool(report.video)}, audio={bool(report.audio)}")
+    
+    # Try Gemini API first if available
     if api_key and genai is not None:
         try:
             genai.configure(api_key=api_key)
-            model = genai.GenerativeModel("gemini-1.5-flash")
-            prompt = (
-                "Decide the emergency responder service for this report. "
-                "Return ONLY one word from: ambulance, hospital, police, firebrigade.\n\n"
-                f"Report text: {report.text}"
-            )
-            resp = model.generate_content(prompt)
-            text = resp.text.strip() if hasattr(resp, "text") else "ambulance"
-            label = normalize_service_label(text)
-            # refine using modalities if provided
+            label = None
+            
+            # 1. Image analysis (highest priority)
             if report.image:
                 im = classify_image_base64(report.image, api_key)
                 if im:
                     label = normalize_service_label(im)
-            if report.audio and not report.image:
-                au = classify_audio_base64(report.audio, api_key)
-                if au:
-                    label = normalize_service_label(au)
-            if report.video and not report.image and not report.audio:
+                    print(f"Image classification result: {im} -> {label}")
+            
+            # 2. Video analysis (if no image)
+            if not label and report.video:
                 vi = classify_video_base64(report.video, api_key)
                 if vi:
                     label = normalize_service_label(vi)
-            return {"service": label.capitalize()}
-        except Exception:
-            pass
-    # Fallback simple decision
-    service = decide_service(text=report.text)
+                    print(f"Video classification result: {vi} -> {label}")
+            
+            # 3. Audio analysis (if no image/video)
+            if not label and report.audio:
+                au = classify_audio_base64(report.audio, api_key)
+                if au:
+                    label = normalize_service_label(au)
+                    print(f"Audio classification result: {au} -> {label}")
+            
+            # 4. Text analysis (if no media or as fallback)
+            if not label and report.text:
+                model = genai.GenerativeModel("gemini-1.5-flash")
+                prompt = (
+                    "Decide the emergency responder service for this report. "
+                    "Return ONLY one word from: ambulance, hospital, police, firebrigade.\n\n"
+                    f"Report text: {report.text}"
+                )
+                resp = model.generate_content(prompt)
+                text = resp.text.strip() if hasattr(resp, "text") else ""
+                if text:
+                    label = normalize_service_label(text)
+                    print(f"Text classification result: {text} -> {label}")
+            
+            if label:
+                return {"service": label.capitalize()}
+        except Exception as e:
+            print(f"Gemini API error: {e}")
+    
+    # Enhanced fallback system
+    print("Using enhanced fallback system...")
+    service = decide_service(text=report.text, has_image=bool(report.image))
+    print(f"Fallback result: {service}")
     return {"service": service.capitalize()}

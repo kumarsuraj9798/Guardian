@@ -17,8 +17,10 @@ def classify_image_base64(b64: str, api_key: Optional[str]) -> Optional[str]:
     image_bytes = base64.b64decode(b64.split(",",1)[1] if "," in b64 else b64)
     parts = [{"mime_type": "image/png", "data": image_bytes}]
     prompt = (
-      "Classify emergency responder from this image. Return one word only: "
-      "ambulance, hospital, police, firebrigade."
+      "Analyze this emergency image and determine which service should respond. "
+      "Look for: fire/smoke/burning = firebrigade, accident/injury/medical = ambulance, "
+      "crime/violence/theft = police, medical emergency = hospital. "
+      "Return ONLY one word: ambulance, hospital, police, firebrigade."
     )
     resp = model.generate_content([prompt, *parts])
     return (resp.text or "").strip() if hasattr(resp, "text") else None

@@ -32,9 +32,20 @@ async function report(req, res) {
     });
 
     // Classify via ML service
-    const mlRes = await classifyIncident({ description, media });
-    const service = (mlRes.service || "ambulance").toLowerCase();
-    incident.classifiedService = service;
+    let service = "ambulance"; // default fallback
+    try {
+      const mlRes = await classifyIncident({ description, media });
+      if (mlRes && mlRes.service) {
+        service = mlRes.service.toLowerCase();
+      }
+    } catch (error) {
+      console.log("ML service failed, using default service:", error.message);
+    }
+    
+    // Only set classifiedService if we have a valid service
+    if (service && ["ambulance", "hospital", "police", "firebrigade"].includes(service)) {
+      incident.classifiedService = service;
+    }
 
     // Find nearest active unit of that type
     const allUnits = await ServiceUnit.find({ type: service, isActive: true, assignedIncidentId: null });
