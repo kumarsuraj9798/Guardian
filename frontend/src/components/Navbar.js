@@ -24,7 +24,30 @@ export default function Navbar({ go, isAuthenticated, user, onLogout }) {
         {!isAuthenticated ? (
           <>
             <button onClick={() => go("signin")} style={btn}>Sign In</button>
-            <button onClick={() => go("landing")} style={btn}>About</button>
+            <button 
+              onClick={() => {
+                // Navigate to landing page first
+                go("landing");
+                // Then scroll to about section after a short delay
+                const scrollToAbout = () => {
+                  const aboutSection = document.getElementById('about');
+                  if (aboutSection) {
+                    window.scrollTo({
+                      top: aboutSection.offsetTop - 80, // Adjust for header height
+                      behavior: 'smooth'
+                    });
+                  } else {
+                    // If section not found, try again after a short delay
+                    setTimeout(scrollToAbout, 100);
+                  }
+                };
+                // Initial attempt after a short delay
+                setTimeout(scrollToAbout, 100);
+              }} 
+              style={btn}
+            >
+              About
+            </button>
           </>
         ) : (
           <>
@@ -125,7 +148,29 @@ export default function Navbar({ go, isAuthenticated, user, onLogout }) {
           {!isAuthenticated ? (
             <>
               <button onClick={() => { go("signin"); setShowMobileMenu(false); }} style={{...btn, width: "100%", marginBottom: "10px"}}>Sign In</button>
-              <button onClick={() => { go("landing"); setShowMobileMenu(false); }} style={{...btn, width: "100%"}}>About</button>
+              <button 
+                onClick={() => { 
+                  go("landing");
+                  setShowMobileMenu(false);
+                  const scrollToAbout = () => {
+                    const aboutSection = document.getElementById('about');
+                    if (aboutSection) {
+                      window.scrollTo({
+                        top: aboutSection.offsetTop - 80, // Adjust for header height
+                        behavior: 'smooth'
+                      });
+                    } else {
+                      // If section not found, try again after a short delay
+                      setTimeout(scrollToAbout, 100);
+                    }
+                  };
+                  // Initial attempt after a short delay
+                  setTimeout(scrollToAbout, 100);
+                }} 
+                style={{...btn, width: "100%"}}
+              >
+                About
+              </button>
             </>
           ) : (
             <>

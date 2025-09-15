@@ -63,6 +63,20 @@ export default function CitizenPortal() {
     }
   };
 
+  const autoAnalyzeAndReport = async (mediaItems, desc) => {
+    try {
+      // Here you can add any automatic analysis logic for the uploaded media
+      console.log('Analyzing media:', mediaItems);
+      
+      // If you want to automatically submit the report after analysis, uncomment:
+      // if (mediaItems.length > 0 && desc) {
+      //   await handleSubmit(desc, mediaItems);
+      // }
+    } catch (error) {
+      console.error('Error during auto analysis:', error);
+    }
+  };
+
   const onFile = async (e, type) => {
     const file = e.target.files?.[0];
     if (!file) return;

@@ -3,13 +3,11 @@
 
 import { SOCIAL_AUTH_CONFIG } from '../config/socialAuth';
 
-// Instagram App Configuration
+// App Configurations - Defined once at the top
 const INSTAGRAM_CLIENT_ID = SOCIAL_AUTH_CONFIG.INSTAGRAM_CLIENT_ID;
-
-// Google App Configuration
 const GOOGLE_CLIENT_ID = SOCIAL_AUTH_CONFIG.GOOGLE_CLIENT_ID;
 
-// Instagram Login (using Instagram Basic Display API)
+// --- Instagram Login ---
 export const loginWithInstagram = () => {
   const redirectUri = encodeURIComponent(`${window.location.origin}/auth/instagram/callback`);
   const scope = 'user_profile,user_media';
@@ -52,7 +50,7 @@ export const loginWithInstagram = () => {
   });
 };
 
-// Handle Instagram callback (to be called from callback page)
+// --- Handle Instagram Callback ---
 export const handleInstagramCallback = (code) => {
   return new Promise((resolve, reject) => {
     // Exchange code for access token
@@ -97,76 +95,94 @@ export const handleInstagramCallback = (code) => {
   });
 };
 
-// Google Login (using Google Identity Services)
-export const loginWithGoogle = () => {
-  return new Promise((resolve, reject) => {
-    // Check if Google client ID is configured
-    if (!GOOGLE_CLIENT_ID || GOOGLE_CLIENT_ID === 'YOUR_GOOGLE_CLIENT_ID') {
-      reject(new Error('Google Client ID not configured. Please set REACT_APP_GOOGLE_CLIENT_ID in your environment variables.'));
-      return;
-    }
 
-    // Load Google Identity Services script if not already loaded
-    if (!window.google) {
-      const script = document.createElement('script');
-      script.src = 'https://accounts.google.com/gsi/client';
-      script.async = true;
-      script.defer = true;
-      script.onload = () => {
-        setTimeout(() => {
-          initializeGoogleAuth(resolve, reject);
-        }, 100); // Small delay to ensure Google is fully loaded
-      };
-      script.onerror = () => {
-        reject(new Error('Failed to load Google Identity Services'));
-      };
-      document.head.appendChild(script);
-    } else {
-      initializeGoogleAuth(resolve, reject);
-    }
+// --- Google Login ---
+export const loginWithGoogle = () => {
+  const redirectUri = encodeURIComponent(`${window.location.origin}/auth/google/callback`);
+  // Standard scopes to get user's profile and email
+  const scope = encodeURIComponent('openid email profile');
+  
+  const googleAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${GOOGLE_CLIENT_ID}&redirect_uri=${redirectUri}&scope=${scope}&response_type=code&prompt=consent`;
+  
+  // Open Google auth in a popup
+  const popup = window.open(
+    googleAuthUrl,
+    'google-login',
+    'width=600,height=700,scrollbars=yes,resizable=yes'
+  );
+  
+  return new Promise((resolve, reject) => {
+    // Check if the user closed the popup
+    const checkClosed = setInterval(() => {
+      if (popup.closed) {
+        clearInterval(checkClosed);
+        reject(new Error('Google login was cancelled'));
+      }
+    }, 1000);
+    
+    // Listen for a message from the callback page
+    const messageListener = (event) => {
+      // Ensure the message is from our own origin
+      if (event.origin !== window.location.origin) return;
+      
+      if (event.data.type === 'GOOGLE_AUTH_SUCCESS') {
+        clearInterval(checkClosed);
+        window.removeEventListener('message', messageListener);
+        popup.close();
+        resolve(event.data.data);
+      } else if (event.data.type === 'GOOGLE_AUTH_ERROR') {
+        clearInterval(checkClosed);
+        window.removeEventListener('message', messageListener);
+        popup.close();
+        reject(new Error(event.data.error));
+      }
+    };
+    
+    window.addEventListener('message', messageListener);
   });
 };
 
-const initializeGoogleAuth = (resolve, reject) => {
-  try {
-    if (!window.google || !window.google.accounts) {
-      reject(new Error('Google Identity Services not loaded properly'));
-      return;
-    }
-
-    window.google.accounts.id.initialize({
+// --- Handle Google Callback ---
+export const handleGoogleCallback = (code) => {
+  return new Promise((resolve, reject) => {
+    const tokenUrl = 'https://oauth2.googleapis.com/token';
+    const params = new URLSearchParams({
       client_id: GOOGLE_CLIENT_ID,
-      callback: (response) => {
-        try {
-          // Decode the JWT token to get user info
-          const payload = JSON.parse(atob(response.credential.split('.')[1]));
-          resolve({
-            idToken: response.credential,
-            userInfo: {
-              id: payload.sub,
-              email: payload.email,
-              name: payload.name,
-              picture: payload.picture,
-              given_name: payload.given_name,
-              family_name: payload.family_name
-            }
-          });
-        } catch (error) {
-          reject(new Error('Failed to parse Google response'));
-        }
-      },
-      auto_select: false,
-      cancel_on_tap_outside: true
+      client_secret: SOCIAL_AUTH_CONFIG.GOOGLE_CLIENT_SECRET, // ⚠️ See security warning below
+      grant_type: 'authorization_code',
+      redirect_uri: `${window.location.origin}/auth/google/callback`,
+      code: code
     });
 
-    // Prompt the user to sign in
-    window.google.accounts.id.prompt((notification) => {
-      if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
-        // User cancelled or skipped
-        reject(new Error('Google sign-in was cancelled'));
+    fetch(tokenUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: params
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.id_token) {
+        // The id_token is a JWT that contains the user's profile info.
+        const payload = JSON.parse(atob(data.id_token.split('.')[1]));
+        
+        resolve({
+          idToken: data.id_token,
+          accessToken: data.access_token,
+          userInfo: {
+            id: payload.sub,
+            email: payload.email,
+            name: payload.name,
+            picture: payload.picture,
+            given_name: payload.given_name,
+            family_name: payload.family_name
+          }
+        });
+      } else {
+        reject(new Error(data.error_description || 'Failed to get Google ID token'));
       }
-    });
-  } catch (error) {
-    reject(new Error('Failed to initialize Google authentication'));
-  }
+    })
+    .catch(error => reject(error));
+  });
 };
