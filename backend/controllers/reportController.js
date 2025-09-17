@@ -1,7 +1,7 @@
 const Incident = require("../models/Incident");
 const ServiceUnit = require("../models/ServiceUnit");
 const History = require("../models/History");
-const classifyIncident = require("../utils/callMLService");
+const { classifyIncident } = require("../utils/callMLService");
 
 function distanceMeters([lng1, lat1], [lng2, lat2]) {
   const toRad = (d) => (d * Math.PI) / 180;

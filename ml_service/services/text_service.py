@@ -1,15 +1,33 @@
-from typing import Optional
+# NLP model for text
 
 def normalize_service_label(text: str) -> str:
-  t = (text or "").lower()
-  if "fire" in t or "brigade" in t:
-    return "firebrigade"
-  if "police" in t or "law" in t:
-    return "police"
-  if "hospital" in t or "doctor" in t:
-    return "hospital"
-  if "ambulance" in t or "medical" in t or "injury" in t:
+    """
+    Normalize service label based on keyword matching in the input text.
+    
+    Args:
+        text (str): Input text to analyze for emergency service keywords
+        
+    Returns:
+        str: Emergency service name (firebrigade, police, hospital, or ambulance)
+    """
+    # Convert to lowercase for case-insensitive matching
+    text_lower = text.lower()
+    
+    # Check for fire-related keywords
+    if "fire" in text_lower or "brigade" in text_lower:
+        return "firebrigade"
+    
+    # Check for police-related keywords
+    if "police" in text_lower or "law" in text_lower:
+        return "police"
+    
+    # Check for hospital-related keywords
+    if "hospital" in text_lower or "doctor" in text_lower:
+        return "hospital"
+    
+    # Check for ambulance-related keywords
+    if "ambulance" in text_lower or "medical" in text_lower or "injury" in text_lower:
+        return "ambulance"
+    
+    # Default case
     return "ambulance"
-  return "ambulance"
-
-# NLP model for text
