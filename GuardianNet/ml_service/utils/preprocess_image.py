@@ -1,1 +1,0 @@
-# Process image files

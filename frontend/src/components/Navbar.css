@@ -1,0 +1,189 @@
+/* --- Main Navbar Styles --- */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 24px;
+    background: #0660e6;
+    color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    height: 70px;
+  }
+   
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+  }
+   
+  .logo img {
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+  }
+   
+  .logo span {
+    font-weight: 800;
+    font-size: 22px;
+  }
+   
+  .desktop-nav {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+   
+  .nav-btn {
+    background: #042d5c;
+    color: #f0f9f8ff;
+    border: 0;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+   
+  .nav-btn:hover {
+    background: #00274d69;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+  }
+   
+  /* --- Dropdowns --- */
+  .dropdown, .user-menu {
+    position: relative;
+  }
+  
+  .dropdown-menu {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    background: white;
+    color: #333;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    padding: 8px;
+    min-width: 180px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+   
+  .services-dropdown {
+    left: 0;
+    right: auto;
+  }
+  
+  /* --- Red Button Styles for Dropdown Items --- */
+  .dropdown-menu button {
+    background: #d32f2f; /* Red background */
+    border: none;
+    padding: 10px 16px;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 14px;
+    color: #fff; /* White text */
+    border-radius: 6px;
+    transition: background 0.2s ease;
+  }
+   
+  .dropdown-menu button:hover {
+    background: #ff4757; /* Lighter red on hover */
+  }
+   
+  .dropdown-menu hr {
+    margin: 4px 0;
+    border: none;
+    border-top: 1px solid #eee;
+  }
+   
+  /* Override for specific buttons in user menu */
+  .dropdown-menu button.logout-btn,
+  .user-menu .dropdown-menu button {
+    background: transparent;
+    color: #333;
+    text-align: left;
+  }
+  .user-menu .dropdown-menu button:hover {
+    background: #f5f5f5;
+  }
+  .user-menu .dropdown-menu .logout-btn {
+    color: #d32f2f;
+    font-weight: 600;
+  }
+  
+  .user-btn {
+    gap: 8px;
+  }
+   
+  .user-icon {
+    font-size: 18px;
+  }
+   
+  .dropdown-arrow {
+    font-size: 10px;
+    transition: transform 0.2s ease-in-out;
+  }
+   
+  /* --- Responsive (Mobile) Styles --- */
+  .mobile-menu-btn {
+    display: none;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+    z-index: 1001;
+  }
+   
+  .mobile-nav {
+    display: none;
+  }
+   
+  @media (max-width: 960px) {
+    .desktop-nav {
+      display: none;
+    }
+   
+    .mobile-menu-btn {
+      display: block;
+    }
+   
+    .mobile-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: absolute;
+      top: 70px;
+      left: 0;
+      right: 0;
+      background: #0d47a1;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      z-index: 1000;
+    }
+   
+    .mobile-nav button {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+    }
+   
+    .mobile-user-info {
+      color: white;
+      font-weight: 600;
+      padding: 10px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.2);
+      margin-top: 10px;
+    }
+  }

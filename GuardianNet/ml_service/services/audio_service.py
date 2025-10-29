@@ -1,1 +1,0 @@
-# Speech to intent model
