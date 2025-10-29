@@ -20,7 +20,7 @@ const GoogleLoginButton = ({ onSignIn, setIsLoading }) => {
             setIsLoading(true);
             try {
                 // Send the ID token to your backend.
-                const apiUrl = process.env.REACT_APP_API_URL || "https://backend-62567aubr-suraj-kumars-projects-bcd2fc14.vercel.app/api";
+                const apiUrl = process.env.REACT_APP_API_URL || "https://backend-6awxx48h6-suraj-kumars-projects-bcd2fc14.vercel.app/api";
                 const response = await axios.post(`${apiUrl}/auth/google`, {
                     idToken: tokenResponse.credential,
                 });

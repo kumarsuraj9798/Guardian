@@ -151,3 +151,6 @@ connectToDatabase()
     console.error("Failed to connect to DB", err);
     process.exit(1);
   });
+
+// Export for Vercel
+module.exports = app;

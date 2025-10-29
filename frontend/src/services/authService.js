@@ -3,7 +3,7 @@ import axios from 'axios';
 
 class AuthService {
   constructor() {
-    this.baseURL = process.env.REACT_APP_API_URL || 'https://backend-62567aubr-suraj-kumars-projects-bcd2fc14.vercel.app/api';
+    this.baseURL = process.env.REACT_APP_API_URL || 'https://backend-6awxx48h6-suraj-kumars-projects-bcd2fc14.vercel.app/api';
     this.token = localStorage.getItem('gn_token');
     this.refreshToken = localStorage.getItem('gn_refresh_token');
     
