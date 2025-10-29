@@ -14,7 +14,7 @@ const io = require("socket.io")(server, {
 app.set("io", io);
 
 app.use(cors({
-  origin: ["http://localhost:3000", "http://localhost:3001", "http://localhost:3002", "https://frontend-9ywyx5oko-suraj-kumars-projects-bcd2fc14.vercel.app"],
+  origin: ["http://localhost:3000", "http://localhost:3001", "http://localhost:3002", "https://guardianfrontend.vercel.app"],
   credentials: true
 }));
 app.use(express.json({ limit: "10mb" }));
