@@ -6,13 +6,16 @@
 
 ![GuardianNet UI](guardian.png.png)
 
-![License](https://img.shields.io/badge/license-MIT-green)  
-![Build](https://img.shields.io/badge/build-passing-brightgreen)  
-![MongoDB](https://img.shields.io/badge/Database-MongoDB-blue)  
-![Node.js](https://img.shields.io/badge/Backend-Node.js-yellow)  
-![React](https://img.shields.io/badge/Frontend-React-blue)  
-![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-orange)  
+!
+<!-- 🏷️ Project Badges Section -->
+![License](https://img.shields.io/badge/license-MIT-green)
+![Build](https://img.shields.io/badge/build-passing-brightgreen)
+![Database](https://img.shields.io/badge/Database-MongoDB-blue)
+![Backend](https://img.shields.io/badge/Backend-Node.js-yellow)
+![Frontend](https://img.shields.io/badge/Frontend-React-blue)
+![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-orange)
 
+---
 GuardianNet is a smart **Emergency AI Response System** designed to quickly connect people in crisis with the nearest responders such as **Ambulance, Police, Fire, and Hospitals**.  
 It leverages **AI decision-making, real-time tracking, and an intuitive dashboard** to improve emergency response times and save lives.  
 
