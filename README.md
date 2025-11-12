@@ -1,19 +1,28 @@
-# GuardianNet 🚨  
-**AI-powered Emergency Dispatch System**
+<!-- Banner image (centered, set width to fit nicely) -->
+<p align="center">
+  <img src="guardian.png.png" width="1000" alt="GuardianNet UI" />
+</p>
 
-# GuardianNet 🚨  
-**AI-powered Emergency Dispatch System**
+<!-- Big centered title -->
+<h1 align="center">GuardianNet 🚨</h1>
 
-![GuardianNet UI](guardian.png.png)
+<!-- Centered subtitle / short tagline -->
+<p align="center">
+  <strong>AI-powered Emergency Dispatch System</strong><br />
+  <em>Connecting people in crisis with the nearest Ambulance, Police, Fire & Hospital units — faster.</em>
+</p>
 
-!
-<!-- 🏷️ Project Badges Section -->
-![License](https://img.shields.io/badge/license-MIT-green)
-![Build](https://img.shields.io/badge/build-passing-brightgreen)
-![Database](https://img.shields.io/badge/Database-MongoDB-blue)
-![Backend](https://img.shields.io/badge/Backend-Node.js-yellow)
-![Frontend](https://img.shields.io/badge/Frontend-React-blue)
-![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-orange)
+<!-- Centered badges -->
+<p align="center">
+  <img src="https://img.shields.io/badge/license-MIT-green" alt="MIT" />
+  <img src="https://img.shields.io/badge/build-passing-brightgreen" alt="build" />
+  <img src="https://img.shields.io/badge/Database-MongoDB-blue" alt="MongoDB" />
+  <img src="https://img.shields.io/badge/Backend-Node.js-yellow" alt="Node.js" />
+  <img src="https://img.shields.io/badge/Frontend-React-blue" alt="React" />
+  <img src="https://img.shields.io/badge/Contributions-Welcome-orange" alt="Contributions" />
+</p>
+
+<hr />
 
 ---
 GuardianNet is a smart **Emergency AI Response System** designed to quickly connect people in crisis with the nearest responders such as **Ambulance, Police, Fire, and Hospitals**.  
