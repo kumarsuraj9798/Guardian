@@ -75,15 +75,6 @@ It leverages **AI decision-making, real-time tracking, and an intuitive dashboar
 
 ---
 
-## 📸 Screenshots  
-# Landing Page  
-![Landing Page Demo](docs/screenshots/landing.png)  
-
-# Active Incidents  
-![Incidents Dashboard](docs/screenshots/incidents.png)  
-
----
-
 # ⚙️ Installation & Setup  
 
 # 1️⃣ Clone the repository  
