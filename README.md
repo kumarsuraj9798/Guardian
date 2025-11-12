@@ -1,6 +1,11 @@
 # GuardianNet 🚨  
 **AI-powered Emergency Dispatch System**
 
+# GuardianNet 🚨  
+**AI-powered Emergency Dispatch System**
+
+![GuardianNet UI](guardian.png.png)
+
 ![License](https://img.shields.io/badge/license-MIT-green)  
 ![Build](https://img.shields.io/badge/build-passing-brightgreen)  
 ![MongoDB](https://img.shields.io/badge/Database-MongoDB-blue)  
